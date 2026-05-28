@@ -1,22 +1,45 @@
+//Import das bibliotecas
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import AppHome from './AppHome';
+//Import das telas
+import HomeScreen from './screens/HomeScreen';
+import AddPetScreen from './screens/AddPetScreen';
+import FoundScreen from './screens/FoundScreen';
+import PetDetailScreen from './screens/PetDetailScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <AppHome/>
-      <StatusBar style="auto" />
-    </View>
-  );
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function TabNavigator() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Perdidos" component={HomeScreen} />
+            <Tab.Screen name="Cadastrar" component={AddPetScreen} />
+            <Tab.Screen name="Encontrados" component={FoundScreen} />
+        </Tab.Navigator>
+    )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App () {
+    return (
+        <NavigationContainer>
+            <StatusBar style="auto" />
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Main"
+                    component={TabNavigator}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="PetDetail"
+                    component={PetDetailScreen}
+                    options={{title: 'Detalhes do Pet'}}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
+
