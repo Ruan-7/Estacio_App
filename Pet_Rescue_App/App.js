@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={{ tabBarLabelStyle: { fontSize: 11 } }}>
             <Tab.Screen name="Perdidos" component={HomeScreen} />
             <Tab.Screen name="Cadastrar" component={AddPetScreen} />
             <Tab.Screen name="Encontrados" component={FoundScreen} />
